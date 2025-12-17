@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+   <%- include('../components/head.ejs') %>
+<body class="container">
+ <h1>Formulaire de connection admin</h1>
+ <% if(query.error && query.error !== ''){ %>
+<%= query.error %>
+<% }%>
+
+ <% if(isLogged){ %>
+
+   <p>Connecté </p>
+<% }%>
+
+
+
+
+
+ <form action="/admin/login" method="post">
+    <input name="name" type="text" placeholder="Nom">
+    <input name="password" type="password" placeholder="Mot de passe">
+    <input type="submit">
+ </form>
+    
+</body>
+</html>
