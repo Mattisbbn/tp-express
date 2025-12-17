@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
    <%- include('../components/head.ejs') %>
-<body class="container">
+<body>
+     <%- include('../components/header.ejs') %>
  <h1>Formulaire de connection admin</h1>
- <% if(query.error && query.error !== ''){ %>
+
+         <% if(query.error && query.error !== ''){ %>
 <%= query.error %>
 <% }%>
 
