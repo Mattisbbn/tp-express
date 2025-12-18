@@ -28,9 +28,14 @@ socket.on("message:received", (data) => {
   messagesContainer.insertAdjacentHTML(
     "beforeend",
     renderMessage(data.author, data.content, data.timestamp)
-  );
   
+  );
+    scrollToBottom()
 });
+
+function scrollToBottom() {
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
 
 function renderMessage(author,message,date) {
   return ` 
