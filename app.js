@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+const cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -7,6 +8,8 @@ const session = require('express-session')
 const navItemsJson = require('./assets/json/nav-items.json')
 
 var app = express();
+
+app.use(cors());
 
 app.use(session({
   secret: 'secret_key',
@@ -49,7 +52,7 @@ app.use('/chat', chatRouter);
 
 app.use(function(req, res, next) {
   res.render('pages/404',{title:"Erreur 404"});
-  next(createError(404));
+  createError(404)
 });
 
 app.use(function(err, req, res, next) {

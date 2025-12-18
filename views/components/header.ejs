@@ -5,7 +5,7 @@
     <% if(isLogged) { %>
 
     <form method="post" action="/admin/logout">
-      <span>Connecté en tant que : <%- login %></span>
+      <span>Bienvenue <%- login %></span>
       <button type="submit" class="btn btn-light btn-sm ms-2">
         Déconnexion
       </button>
@@ -17,16 +17,18 @@
   </div>
 </header>
 <section id="subheader" class="d-flex bg-light py-2">
-
   <ul class="d-flex m-auto list-unstyled gap-3">
-    <%
+    <% navItems.forEach(nav => { if (!nav.restricted || isLogged) { %>
 
-    navItems.forEach(nav => {%>
-    <li><a class="<%= nav.route === uri ? 'text-black text-decoration-none' : ''  %>"  href="<%= nav.route %>"><%= nav.title %></a></li>
-    
-     <%});
-    
-    %>
+    <li>
+      <a
+        class="<%= nav.route === uri ? 'text-black text-decoration-none' : '' %>"
+        href="<%= nav.route %>"
+      >
+        <%= nav.title %>
+      </a>
+    </li>
+
+    <% } }); %>
   </ul>
-
 </section>

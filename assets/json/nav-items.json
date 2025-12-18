@@ -1,14 +1,22 @@
 [
   {
     "title": "Accueil",
-    "route": "/"
+    "route": "/",
+    "restricted": false
   },
   {
     "title": "404",
-    "route": "/ezfzger"
+    "route": "/ezfzger",
+    "restricted": false
   },
   {
     "title": "Chat",
-    "route": "/chat"
+    "route": "/chat",
+    "restricted": false
+  },
+  {
+    "title": "Dashboard",
+    "route": "/admin/dashboard",
+    "restricted": true
   }
 ]
