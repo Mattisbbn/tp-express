@@ -7,6 +7,8 @@ const messageSubmit = document.querySelector("#message-submit");
 
 const messagesContainer = document.querySelector("#messages-container");
 
+const uuid = document.querySelector('main').getAttribute('uuid')
+
 messageSubmit.addEventListener("click", () => {
   try {
     if (nameInput.value === "" && nameInput.value.length < 1)
@@ -17,7 +19,7 @@ messageSubmit.addEventListener("click", () => {
     socket.emit("message:send", {
       author: nameInput.value,
       content: messageInput.value,
-      timestamp: 1766054571,
+      uuid
     });
   } catch (e) {
     alert(e);
@@ -27,7 +29,7 @@ messageSubmit.addEventListener("click", () => {
 socket.on("message:received", (data) => {
   messagesContainer.insertAdjacentHTML(
     "beforeend",
-    renderMessage(data.author, data.content, data.timestamp)
+    renderMessage(data)
   );
     scrollToBottom()
 });
@@ -36,20 +38,20 @@ function scrollToBottom() {
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-function renderMessage(author,message,date) {
+function renderMessage(data) {
   return ` 
    <div class="d-flex flex-row justify-content-start col-12">
         <div class="col-12">
                           <p
                             class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary"
                           >
-                            ${message}
+                            ${data.content}
                           </p>
                           <p
                             class="small ms-3 mb-3 rounded-3 text-muted float-end"
                           >
                           
-                             ${author} | 12:00 PM | Aug 13 
+                            <span class="${data.uuid === uuid ? 'text-danger' : ''} fw-bold"> ${data.author} </span>| ${dayjs(data.timestamp).format('DD/MM/YYYY HH:mm')}
                           </p>
                         </div>
                       </div>

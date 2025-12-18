@@ -4,7 +4,7 @@
 
 <body>
   <%- include('../../components/header.ejs') %>
-  <main>
+  <main uuid="<%= uuid %>">
     <section>
       <div class="container py-3">
         <fieldset class="d-flex flex-row my-4">
@@ -69,6 +69,7 @@
     </section>
   </main>
   <%- include('../../components/footer.ejs') %>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/javascripts/chat.js"></script>
 </body>
