@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Accueil",
+    "route": "/"
+  },
+  {
+    "title": "404",
+    "route": "/ezfzger"
+  },
+  {
+    "title": "Chat",
+    "route": "/chat"
+  }
+]

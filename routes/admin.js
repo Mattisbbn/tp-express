@@ -11,13 +11,12 @@ router.get("/login", function (req, res, next) {
   });
 });
 
-
 router.get("/dashboard", function (req, res, next) {
   const isLogged = req.session.isLogged;
   const login = req.session.login
   if (isLogged) {
     res.render("pages/admin-dashboard.ejs",{
-        login,isLogged
+        login,isLogged,title:'Dashboard admin'
     });
   } else {
     res.redirect("/admin/login");

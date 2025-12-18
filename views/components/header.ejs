@@ -19,10 +19,14 @@
 <section id="subheader" class="d-flex bg-light py-2">
 
   <ul class="d-flex m-auto list-unstyled gap-3">
-    <li>Accueil</li>
-    <li></li>
-    <li>a</li>
-  </ul>
+    <%
 
+    navItems.forEach(nav => {%>
+    <li><a class="<%= nav.route === uri ? 'text-black text-decoration-none' : ''  %>"  href="<%= nav.route %>"><%= nav.title %></a></li>
+    
+     <%});
+    
+    %>
+  </ul>
 
 </section>
