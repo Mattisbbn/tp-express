@@ -28,7 +28,6 @@ socket.on("message:received", (data) => {
   messagesContainer.insertAdjacentHTML(
     "beforeend",
     renderMessage(data.author, data.content, data.timestamp)
-  
   );
     scrollToBottom()
 });
@@ -39,8 +38,8 @@ function scrollToBottom() {
 
 function renderMessage(author,message,date) {
   return ` 
-   <div class="d-flex flex-row justify-content-start">
-        <div>
+   <div class="d-flex flex-row justify-content-start col-12">
+        <div class="col-12">
                           <p
                             class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary"
                           >
