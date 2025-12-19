@@ -11,8 +11,8 @@ router.get("/", function (req, res, next) {
 
 });
 
-router.get("/users", usersController.index);
-router.get("/user/:id", usersController.view);
+// router.get("/users", usersController.index);
+// router.get("/user/:id", usersController.view);
 
 
 module.exports = router;

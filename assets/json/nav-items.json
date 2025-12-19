@@ -15,8 +15,14 @@
     "restricted": false
   },
   {
+    "title": "Route dynamique",
+    "route": "/prenom/aaa",
+    "restricted": false
+  },
+  {
     "title": "Dashboard",
     "route": "/admin/dashboard",
     "restricted": true
   }
+ 
 ]

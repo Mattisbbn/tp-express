@@ -1,7 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const adminController = {
+const UserController = {
   index: async (req, res, next) => {
     try {
       res.render("pages/admin/dashboard/users/index.ejs", {
@@ -91,6 +91,60 @@ const adminController = {
       });
     }
   },
+  create: async (req, res, next) => {
+    try {
+      const { email, name, role } = req.body;
+
+      const newUser = await prisma.users.create({
+        data: {
+          name:name,
+          email:email,
+          role:role,
+        }
+      });
+
+      return res.status(201).json({
+        success: true,
+        message: "Utilisateur créé avec succès",
+        data: newUser,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Erreur lors de la création de l'utilisateur",
+        error: error.message,
+      });
+    }
+  },
+  update: async (req, res, next) => {
+    try {
+      const userId = parseInt(req.params.id);
+      const { email, name, role } = req.body;
+
+      const updatedUser = await prisma.users.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          name: name,
+          email: email,
+          role: role,
+        },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Utilisateur modifié avec succès",
+        data: updatedUser,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Erreur lors de la modification de l'utilisateur",
+        error: error.message,
+      });
+    }
+  },
 };
 
-module.exports = adminController;
+module.exports = UserController;

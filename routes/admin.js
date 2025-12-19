@@ -12,15 +12,6 @@ router.get("/login", function (req, res, next) {
 });
 
 
-//   const isLogged = req.session.isLogged;
-//   if (isLogged) {
-//     res.render("pages/admin/index.ejs",{
-//         login:req.session.login,isLogged,title:'Dashboard admin'
-//     });
-//   } else {
-//     res.redirect("/admin/login");
-//   }
-// });
 
 router.post("/login", function (req, res, next) {
   const name = req.body.name;
