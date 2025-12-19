@@ -10,15 +10,15 @@ datasource db {
 model categories {
   id                Int                 @id @default(autoincrement())
   label             String?
-  course_categories course_categories[] @ignore
+  course_categories course_categories[]
 }
 
 model certificates {
   id            Int          @id @default(autoincrement())
-  enrollment_id Int?         @unique(map: "sqlite_autoindex_certificates_1")
+  enrollment_id Int?         @unique
   issue_date    DateTime?
   serial_number String?
-  enrollments   enrollments? @relation(fields: [enrollment_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  enrollment    enrollments? @relation(fields: [enrollment_id], references: [id], onDelete: Cascade)
 }
 
 model chapters {
@@ -26,18 +26,16 @@ model chapters {
   course_id Int?
   title     String?
   duration  Int?
-  courses   courses? @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  course    courses? @relation(fields: [course_id], references: [id], onDelete: Cascade)
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model course_categories {
-  course_id   Int?
-  category_id Int?
-  categories  categories? @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  courses     courses?    @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  course_id   Int
+  category_id Int
+  category    categories @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  course      courses    @relation(fields: [course_id], references: [id], onDelete: Cascade)
 
   @@id([course_id, category_id])
-  @@ignore
 }
 
 model courses {
@@ -46,8 +44,8 @@ model courses {
   price             Float?
   instructor_id     Int?
   chapters          chapters[]
-  course_categories course_categories[] @ignore
-  users             users?              @relation(fields: [instructor_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  course_categories course_categories[]
+  instructor        users?              @relation(fields: [instructor_id], references: [id], onDelete: SetNull)
   enrollments       enrollments[]
   reviews           reviews[]
 }
@@ -58,8 +56,8 @@ model enrollments {
   course_id    Int?
   date         DateTime?     @default(now())
   certificates certificates?
-  courses      courses?      @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users        users?        @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  course       courses?      @relation(fields: [course_id], references: [id], onDelete: Cascade)
+  user         users?        @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model reviews {
@@ -68,16 +66,16 @@ model reviews {
   course_id Int?
   rating    Int?
   comment   String?
-  courses   courses? @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users     users?   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  course    courses? @relation(fields: [course_id], references: [id], onDelete: Cascade)
+  user      users?   @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model users {
   id          Int           @id @default(autoincrement())
   name        String?
-  email       String?       @unique(map: "sqlite_autoindex_users_1")
+  email       String?       @unique
   role        String?
-  courses     courses[]
-  enrollments enrollments[]
+  courses     courses[]     // Cours créés en tant qu'instructeur
+  enrollments enrollments[] // Inscriptions en tant qu'élève
   reviews     reviews[]
 }
