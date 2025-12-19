@@ -12,6 +12,7 @@ module.exports = function (io) {
 
     socket.on("message:send", (data) => {
         data.timestamp = Date.now()
+        data.content = data.content.replace(/connard/gi, "canard");
         messagesHistory.push(data);
       io.emit("message:received", data);
     });

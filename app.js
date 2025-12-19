@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+const expressLayouts = require('express-ejs-layouts');
 const cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -38,6 +39,8 @@ const chatRouter = require('./routes/chat');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(expressLayouts);
+app.set('layout', 'layouts/base-layout');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -51,7 +54,7 @@ app.use('/admin', adminRouter);
 app.use('/chat', chatRouter);
 
 app.use(function(req, res, next) {
-  res.render('pages/404',{title:"Erreur 404"});
+  res.render('pages/404',{title:"Erreur 404",layout:false});
   createError(404)
 });
 

@@ -1,60 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<%- include('../../components/head.ejs') %>
-
-<body>
-  <%- include('../../components/header.ejs') %>
-  <main data-uuid="<%= uuid %>" data-username="<%= username %>">
-    <div class="modal fade" id="changeUsernameModal" tabindex="-1" aria-labelledby="changeUsernameModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog">
-        <form method="post" action="/chat/username" class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="changeUsernameModalLabel">Veuiller un nom d'utilisateur</h1>
-          </div>
-          <div class="modal-body">
-            <input type="text" class="form-control form-control-lg bg-light " name="username" id="name-input" placeholder="Nom" />
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Confirmer</button>
-          </div>
-        </form>
-      </div>
+<main data-uuid="<%= uuid %>" data-username="<%= username %>">
+  <div class="modal fade" id="changeUsernameModal" tabindex="-1" aria-labelledby="changeUsernameModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <form method="post" action="/chat/username" class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="changeUsernameModalLabel">Veuiller un nom d'utilisateur</h1>
+        </div>
+        <div class="modal-body">
+          <input type="text" class="form-control form-control-lg bg-light " name="username" id="name-input"
+            placeholder="Nom" />
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Confirmer</button>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <section>
-      <div class="container py-3">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card" id="chat3" style="border-radius: 15px">
-              <div class="card-body">
-                <div class="row">
-                  <div class="pt-3 pe-3 overflow-auto d-flex flex-column col-12"
-                    style="position: relative; height: 400px" id="messages-container">
-                  </div>
+  <section>
+    <div class="container py-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card" id="chat3" style="border-radius: 15px">
+            <div class="card-body">
+              <div class="row">
+                <div class="pt-3 pe-3 overflow-auto d-flex flex-column col-12" style="position: relative; height: 400px"
+                  id="messages-container">
+                </div>
 
-                </div>
-                <div class="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2 col-12">
-                  <fieldset class="d-flex col-12">
-                    <input type="text" class="form-control form-control-lg bg-light me-1" id="message-input"
-                      placeholder="Message" />
-                    <button id="message-submit" class="btn btn-primary">
-                      Envoyer
-                    </button>
-                  </fieldset>
-                </div>
+              </div>
+              <div class="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2 col-12">
+                <fieldset class="d-flex col-12">
+                  <input type="text" class="form-control form-control-lg bg-light me-1" id="message-input"
+                    placeholder="Message" />
+                  <button id="message-submit" class="btn btn-primary">
+                    Envoyer
+                  </button>
+                </fieldset>
               </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
-    </section>
-  </main>
-  <%- include('../../components/footer.ejs') %>
-  <script defer src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-  <script defer src="/socket.io/socket.io.js"></script>
-  <script defer src="/javascripts/chat.js"></script>
-</body>
+    </div>
+    </div>
+  </section>
+</main>
 
-</html>
+<script defer src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script defer src="/socket.io/socket.io.js"></script>
+<script defer src="/javascripts/chat.js"></script>

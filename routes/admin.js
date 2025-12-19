@@ -5,7 +5,7 @@ const { isUserLogged } = require("../utils/auth");
 
 /* GET home page. */
 router.get("/login", function (req, res, next) {
-  res.render("pages/admin-login", {
+  res.render("pages/admin/login", {
     title: "Formulaire connection admin",
     query: req.query,
   });
@@ -15,7 +15,7 @@ router.get("/dashboard", function (req, res, next) {
   const isLogged = req.session.isLogged;
   const login = req.session.login
   if (isLogged) {
-    res.render("pages/admin-dashboard.ejs",{
+    res.render("pages/admin/index.ejs",{
         login,isLogged,title:'Dashboard admin'
     });
   } else {
