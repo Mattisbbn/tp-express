@@ -11,19 +11,14 @@ const UserController = {
       next(error);
     }
   },
-
   view: async (req, res, next) => {
-    const userId = parseInt(req.params.id);
+ 
     try {
-      const user = await prisma.users.findUnique({
-        where: {
-          id: userId,
-        },
-      });
+ 
 
       res.render("pages/admin/dashboard/users/view.ejs", {
         title: "Liste des utilisateurs",
-        user,
+      
       });
     } catch (error) {
       next(error);

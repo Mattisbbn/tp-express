@@ -33,7 +33,6 @@ router.post("/username", async function (req, res, next) {
 
     if(!username && !username.length > 0) throw new Error('Veuillez choisir un nom d\'utilisateur valide !')
 
-
     req.session.username = username;
     req.session.uuid = randomUUID();
 
