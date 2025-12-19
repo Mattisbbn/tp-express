@@ -24,6 +24,8 @@ COPY --from=builder /app/node_modules ./node_modules
 # 2. On copie le reste de ton code source (depuis ton dossier vers l'image)
 COPY . .
 
+RUN npx prisma generate
+
 # Exposition du port (documentation pour Docker)
 EXPOSE 8080
 
