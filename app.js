@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session')
 const navItemsJson = require('./assets/json/nav-items.json')
+const { isAdmin } = require('./middlewares/AuthMiddleware')
 
 var app = express();
 
@@ -34,6 +35,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const adminRouter = require('./routes/admin');
 const chatRouter = require('./routes/chat');
+const dashboardRouter = require('./routes/dashboard')
 
 
 
@@ -51,7 +53,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
+app.use('/admin/dashboard',isAdmin, dashboardRouter);
 app.use('/chat', chatRouter);
+
 
 app.use(function(req, res, next) {
   res.render('pages/404',{title:"Erreur 404",layout:false});
